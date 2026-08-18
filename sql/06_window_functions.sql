@@ -1,5 +1,5 @@
 -- Hospital Database SQL Project
--- Window functions
+-- 06: Window Functions
 
 -- Total appointment count while preserving individual appointment rows
 SELECT
@@ -23,6 +23,13 @@ SELECT
     medicine_name,
     price,
     AVG(price) OVER () AS average_price
+FROM medicines;
+
+-- Total medicine price while preserving individual rows
+SELECT
+    medicine_name,
+    price,
+    SUM(price) OVER () AS total_price
 FROM medicines;
 
 -- Running total of medicine prices
@@ -61,7 +68,35 @@ SELECT
     ) AS price_difference
 FROM medicines;
 
--- Dense ranking by medicine price
+-- ROW_NUMBER: every row gets a unique number
+SELECT
+    doctor_name,
+    department_id,
+    ROW_NUMBER() OVER (
+        ORDER BY doctor_name
+    ) AS row_num
+FROM doctors;
+
+-- ROW_NUMBER restarts within each department
+SELECT
+    doctor_name,
+    department_id,
+    ROW_NUMBER() OVER (
+        PARTITION BY department_id
+        ORDER BY doctor_name
+    ) AS row_num
+FROM doctors;
+
+-- RANK: ties share a rank and gaps can occur
+SELECT
+    doctor_name,
+    doctor_id,
+    RANK() OVER (
+        ORDER BY doctor_id DESC
+    ) AS doctor_rank
+FROM doctors;
+
+-- DENSE_RANK: ties share a rank without gaps
 SELECT
     medicine_name,
     price,
