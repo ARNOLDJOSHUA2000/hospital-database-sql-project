@@ -21,8 +21,6 @@ Examples include:
 
 ## 🗂️ Database Entities
 
-The queries in this project work with the following relational tables:
-
 | Table | Purpose |
 |---|---|
 | `patients` | Patient information such as name, date of birth, and city |
@@ -35,7 +33,6 @@ The queries in this project work with the following relational tables:
 
 ```text
 patients ───────< appointments >─────── doctors
-                                      │
                                       │
                                       ▼
                                  departments
@@ -65,7 +62,7 @@ medicines
 - `COUNT()`
 - `SUM()`
 - `AVG()`
-- `MAX()`
+- `MIN()` / `MAX()`
 - `GROUP BY`
 - `HAVING`
 
@@ -116,6 +113,8 @@ hospital-database-sql-project/
 ├── README.md
 │
 ├── sql/
+│   ├── schema.sql
+│   ├── sample_data.sql
 │   ├── 01_basics_and_filtering.sql
 │   ├── 02_aggregation_groupby_having.sql
 │   ├── 03_joins.sql
@@ -130,6 +129,48 @@ hospital-database-sql-project/
 └── docs/
     └── hospital_sql_project_interview_transcript.md
 ```
+
+## 🚀 Quick Start
+
+### 1. Create a PostgreSQL database
+
+Create a database in PostgreSQL, for example:
+
+```sql
+CREATE DATABASE hospital_db;
+```
+
+Connect to `hospital_db` before continuing.
+
+### 2. Create the schema
+
+Run:
+
+```text
+sql/schema.sql
+```
+
+This creates the five tables, relationships, constraints, and indexes.
+
+### 3. Load the sample data
+
+Run:
+
+```text
+sql/sample_data.sql
+```
+
+The sample dataset is synthetic and contains patients, doctors, departments, appointments, and medicines designed for SQL practice.
+
+### 4. Run the analysis
+
+Run the numbered files in order:
+
+```text
+01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10
+```
+
+You can execute them in pgAdmin Query Tool or another PostgreSQL client.
 
 ## 🔎 Example Business Queries
 
@@ -220,28 +261,29 @@ This project demonstrates the ability to:
 - Create business KPIs from raw records
 - Explain SQL decisions in interview-style discussions
 
-## 🧪 How to Run
+## 🧪 Dataset Notes
 
-1. Install PostgreSQL and pgAdmin.
-2. Create the hospital database.
-3. Create/import the required tables and data.
-4. Open the SQL files under `sql/` in pgAdmin or another PostgreSQL client.
-5. Execute the queries against the hospital database.
+The repository uses **synthetic sample data** for learning and portfolio purposes. It does not contain real patient or medical records.
 
-> **Note:** The repository currently contains the SQL analysis and documentation. The exact database creation/data-loading scripts should be added when the final dataset/schema is included in the project.
+The sample data intentionally includes useful edge cases such as:
+
+- Patients with multiple appointments
+- A patient with no appointments
+- Doctors with different appointment volumes
+- Completed, scheduled, and cancelled appointments
+- Medicines with zero, low, normal, and high stock
+- A broad range of medicine prices
 
 ## 📈 Future Improvements
 
-- Add database schema/ER diagram
-- Add `CREATE TABLE` scripts
-- Add sample/seed data
-- Add data-quality checks
-- Add more advanced analytical queries
+- Add an ER diagram
+- Add data-quality validation queries
 - Add PostgreSQL views
 - Add stored procedures/functions where appropriate
-- Add a dashboard using Power BI or Tableau
+- Add a Power BI or Tableau dashboard
 - Add query-result screenshots
 - Add performance analysis with `EXPLAIN ANALYZE`
+- Add automated SQL checks in GitHub Actions
 
 ## 👤 Author
 
@@ -255,4 +297,4 @@ See [`docs/hospital_sql_project_interview_transcript.md`](docs/hospital_sql_proj
 
 ---
 
-⭐ This project is part of a hands-on SQL learning portfolio and is intended to demonstrate practical PostgreSQL querying and analytical thinking.
+⭐ This project is part of a hands-on SQL learning portfolio and demonstrates practical PostgreSQL querying, relational thinking, and analytical problem solving.
